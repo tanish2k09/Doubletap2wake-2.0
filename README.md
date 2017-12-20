@@ -15,7 +15,9 @@ Follow these steps if you have the good ol' v1.0 from dev Dennis Rassmann :
 5) Remove "DT2W_FEATHER" definition from the defines.
 
 Optional step 6: Change Version, author, desc, etc. Find "/* Version, author, desc, etc */" and replace next 4 lines from port file.
+
 7) That's it! You're good to compile it now.
+
 8) If it works nicely, make sure to give me a thanks on xda thread :D
 
 
