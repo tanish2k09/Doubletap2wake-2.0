@@ -59,23 +59,22 @@
 #endif
 
 /* Version, author, desc, etc */
-#define DRIVER_AUTHOR "Dennis Rassmann <showp1984@gmail.com>"
+#define DRIVER_AUTHOR "Tanish <tanish2k09.dev@gmail.com>"
 #define DRIVER_DESCRIPTION "Doubletap2wake for almost any device"
-#define DRIVER_VERSION "1.0"
+#define DRIVER_VERSION "2.0"
 #define LOGTAG "[doubletap2wake]: "
 
 MODULE_AUTHOR(DRIVER_AUTHOR);
 MODULE_DESCRIPTION(DRIVER_DESCRIPTION);
 MODULE_VERSION(DRIVER_VERSION);
-MODULE_LICENSE("GPLv2");
+MODULE_LICENSE("GPLv3");
 
 /* Tuneables */
 #define DT2W_DEBUG         0
 #define DT2W_DEFAULT       1
 
 #define DT2W_PWRKEY_DUR   20
-#define DT2W_DISTANCE_X    80
-#define DT2W_DISTANCE_Y    80
+#define DT2W_RADIUS       80
 #define VIB_STRENGTH      70
 #define DT2W_TIME         750
 #define DT2W_OFF 		  0

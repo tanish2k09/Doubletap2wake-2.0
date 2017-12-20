@@ -1,0 +1,44 @@
+/* Doubletap2wake main function */
+static void detect_doubletap2wake(int x, int y)
+{
+	if (touch_cnt) {
+		touch_cnt = false;
+		if (touch_nr == 0) {        // This will be true on first touch
+			new_touch(x, y);
+		} 
+		else if (touch_nr == 1)     //This is true on second touch
+		{
+            // Check tap distance and time condtions
+			if ((calc_within_range(x_pre, y_pre,x,y, DT2W_DISTANCE_X) == true) && ((ktime_to_ms(ktime_get())-tap_time_pre) < dt2w_time))
+            {
+//				touch_nr++;     Here we know that the touch number is going to be 2 and hence >1 so the if statement down below will turn true.
+//                              so it is better that we don't wait for the control to go there, and we pwr_on it from here directly
+                doubletap2wake_pwrtrigger();  // We queue the screen on first, as it takes more time to do than vibration.
+			    set_vibrate(vib_strength);    // While the screen is queued, and is waking, we hammer the vibrator. Minor UX tweak.
+			    doubletap2wake_reset();     // Here the touch number is also reset to 0, but the program executes as needed. See yourself.
+            }
+			else {          //If the second tap isn't close or fast enough, reset previous coords, treat second tap as a separate first tap
+				doubletap2wake_reset();
+				new_touch(x, y);
+			}
+		}
+	}
+}
+
+
+
+
+/*Distance condition calculator*/
+static bool calc_within_range(int x_pre, int y_pre, int x_new, int y_new, int radius_max) {
+	int calc_radius = ((x_new-x_pre)*(x_new-x_pre)) - ((y_new-y_pre)*(y_new-y_pre)) ;
+    if (calc_radius < ((radius_max)*(radius_max)))
+        return true;
+    return false;
+}
+
+
+/* Version, author, desc, etc */
+#define DRIVER_AUTHOR "Tanish <tanish2k09.dev@gmail.com>"
+#define DRIVER_DESCRIPTION "Doubletap2wake for almost any device"
+#define DRIVER_VERSION "2.0"
+#define LOGTAG "[doubletap2wake]: "
