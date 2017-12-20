@@ -1,7 +1,10 @@
+/*Define DT2W_RADIUS for radial distance calculation*/
+#define DT2W_RADIUS 100
+
 /* Doubletap2wake main function */
 static void detect_doubletap2wake(int x, int y)
 {
-	if (touch_cnt) {
+	if (touch_cnt) {            // We are not checking for dt2w_switch condition because the control never reaches here on disabling dt2w.
 		touch_cnt = false;
 		if (touch_nr == 0) {        // This will be true on first touch
 			new_touch(x, y);
@@ -9,7 +12,7 @@ static void detect_doubletap2wake(int x, int y)
 		else if (touch_nr == 1)     //This is true on second touch
 		{
             // Check tap distance and time condtions
-			if ((calc_within_range(x_pre, y_pre,x,y, DT2W_DISTANCE_X) == true) && ((ktime_to_ms(ktime_get())-tap_time_pre) < dt2w_time))
+			if ((calc_within_range(x_pre, y_pre,x,y, DT2W_RADIUS) == true) && ((ktime_to_ms(ktime_get())-tap_time_pre) < dt2w_time))
             {
 //				touch_nr++;     Here we know that the touch number is going to be 2 and hence >1 so the if statement down below will turn true.
 //                              so it is better that we don't wait for the control to go there, and we pwr_on it from here directly

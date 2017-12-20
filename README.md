@@ -7,12 +7,15 @@ How to upgrade generic dt2w-2.0 in your custom kernel ?
 
 Follow these steps if you have the good ol' v1.0 from dev Dennis Rassmann :
 (For feasibility, I've added port-dt2w-functions.txt with all the necessary code)
+(Also note : doubletap2wake.c has been referenced as dt2w.c just because I'm too lazy)
 1) Replace the whole "detect_doubletap2wake" function from v2.0 to v1.0
 2) Remove "calc_feather" function from v1.0 and place "calc_within_range" function from v2.0
 3) Remove "exec_count" variable declaration ("static bool exec_count") and uses from all places
-Optional step 4: Change Version, author, desc, etc. Find "/* Version, author, desc, etc */" and replace next 4 lines from port file.
-5) That's it! You're good to compile it now.
-6) If it works nicely, make sure to give me a thanks on xda thread :D
+4) Define "DT2W_RADIUS" in the beginning of dt2w.c, along with other defines. Copy from port txt.
+5) Remove "DT2W_FEATHER" definition from the defines.
+Optional step 6: Change Version, author, desc, etc. Find "/* Version, author, desc, etc */" and replace next 4 lines from port file.
+7) That's it! You're good to compile it now.
+8) If it works nicely, make sure to give me a thanks on xda thread :D
 
 
 Follow these steps if you don't even have the good ol' v1.0 from dev Dennis Rassmann :
