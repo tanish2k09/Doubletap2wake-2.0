@@ -10,13 +10,12 @@ Follow these steps if you have the good ol' v1.0 from dev Dennis Rassmann :
 (Also note : doubletap2wake.c has been referenced as dt2w.c just because I'm too lazy)
 1) Replace the whole "detect_doubletap2wake" function from v2.0 to v1.0
 2) Remove "calc_feather" function from v1.0 and place "calc_within_range" function from v2.0
-3) Remove "exec_count" variable declaration ("static bool exec_count") and uses from all places
-4) Define "DT2W_RADIUS" in the beginning of dt2w.c, along with other defines. Copy from port txt.
-5) Remove "DT2W_FEATHER" definition from the defines.
+3) Define "DT2W_RADIUS" in the beginning of dt2w.c, along with other defines. Copy from port txt.
+4) Remove "DT2W_FEATHER" definition from the defines.
 
-Optional step 6: Change Version, author, desc, etc. Find "/* Version, author, desc, etc */" and replace next 4 lines from port file.
+Optional step 5: Change Version, author, desc, etc. Find "/* Version, author, desc, etc */" and replace next 4 lines from port file.
 
-7) Remove the third argument from all "detect_doubletap2wake" calls. Usually it's "true"
+6) Remove the third argument from all "detect_doubletap2wake" calls. Usually it's "true"
 
 7) That's it! You're good to compile it now.
 
