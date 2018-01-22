@@ -103,6 +103,7 @@ unsigned int pocket_override_timeout = 800; //
 static cputime64_t initial_override_press=0; 
 unsigned int vibration_strength_on_pocket_override = 150;	//
 static unsigned int current_tap=0;
+static int exec_count = true;
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 extern struct vib_trigger *vib_trigger;
@@ -160,6 +161,7 @@ void gestures_setdev(struct input_dev *input_device)
 
 /* reset on finger release */
 static void doubletap2wake_reset(void) {
+	exec_count = true;
 	touch_nr = 0;
 	tap_time_pre = 0;
 	x_pre = 0;
@@ -211,7 +213,7 @@ static void new_touch(int x, int y) {
 /* Doubletap2wake main function */
 static void detect_doubletap2wake(int x, int y)
 {
-	if (touch_cnt) {
+	if ((dt2w_switch > 0) && (exec_count) && (touch_cnt)) {
 		touch_cnt = false;
 		if (touch_nr == 0) {        // This will be true on first touch
 			new_touch(x, y);
@@ -223,6 +225,7 @@ static void detect_doubletap2wake(int x, int y)
             {
 //				touch_nr++;     Here we know that the touch number is going to be 2 and hence >1 so the if statement down below will turn true.
 //                              so it is better that we don't wait for the control to go there, and we pwr_on it from here directly
+				exec_count = false;
                 doubletap2wake_pwrtrigger();  // We queue the screen on first, as it takes more time to do than vibration.
 			    set_vibrate(vib_strength);    // While the screen is queued, and is waking, we hammer the vibrator. Minor UX tweak.
 			    doubletap2wake_reset();     // Here the touch number is also reset to 0, but the program executes as needed. See yourself.
