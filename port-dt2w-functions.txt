@@ -4,7 +4,7 @@
 /* Doubletap2wake main function */
 static void detect_doubletap2wake(int x, int y)
 {
-	if ((dt2w_switch) && (exec_count) && (touch_cnt)) {            // We are not checking for dt2w_switch condition because the control never reaches here on disabling dt2w.
+	if ((dt2w_switch > 0) && (exec_count) && (touch_cnt)) {            // We are not checking for dt2w_switch condition because the control never reaches here on disabling dt2w.
 		touch_cnt = false;
 		if (touch_nr == 0) {        // This will be true on first touch
 			new_touch(x, y);
