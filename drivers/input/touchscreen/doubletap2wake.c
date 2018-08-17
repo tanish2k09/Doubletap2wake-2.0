@@ -196,7 +196,7 @@ static void doubletap2wake_pwrtrigger(void) {
 }
 
 static bool calc_within_range(int x_pre, int y_pre, int x_new, int y_new, int radius_max) {
-	int calc_radius = ((x_new-x_pre)*(x_new-x_pre)) - ((y_new-y_pre)*(y_new-y_pre)) ;
+	int calc_radius = ((x_new-x_pre)*(x_new-x_pre)) + ((y_new-y_pre)*(y_new-y_pre)) ;
     if (calc_radius < ((radius_max)*(radius_max)))
         return true;
     return false;
